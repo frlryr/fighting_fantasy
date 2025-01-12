@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+# PEP 621. See https://www.python.org/dev/peps/pep-0621/
+name = "fighting_fantasy"
+description = ""
+readme = "README.md"
+requires-python = "~=3.10"
+license = "MIT"
+authors = [
+    {name = "Diego Vitoriano", email = "diego.vitoriano@impi.sh"},
+]
+maintainers = [
+    {name = "Diego Vitoriano", email = "diego.vitoriano@impi.sh"},
+]
+keywords = [
+]
+classifiers = [
+]
+dependencies = [
+]
+dynamic = ["version"]
+# scripts = { ff = "fighting_fantasy.cli:main" }
+
+[project.urls]
+Donate = "https://impi.sh/donate/"
+Documentation = ""
+Changes = ""
+"Source Code" = "https://github.com/frlryr/scudo/"
+"Issue Tracker" = "https://github.com/frlryr/scudo/issues/"
+
+[tool.hatch]
+version.path = "src/scudo/__init__.py"
+build.packages = ["src/scudo"]
+envs.dev.dependencies = [
+    "pre-commit~=3.8",
+    "pytest~=8.3",
+    "hatch~=1.12",
+    "pdoc~=14.7",
+    "ipdb~=0.13",
+    "ruff~=0.6",
+]
+envs.dev.scripts.check = "pre-commit"
+envs.dev.scripts."build-docs" = "mkdir docs && pdoc -o docs src/scudo/"
+envs.dev.scripts."serve-docs" = "pdoc -n -p8000 src/scudo"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.bandit]
+skips = [
+    "B101"
+]
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "Q", "I"]
